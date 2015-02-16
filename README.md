@@ -49,16 +49,58 @@ Further, note that for SLIC, both the original implementation as well as the imp
 
 ## Building
 
-**Work in progress.**
+**Note:** The library was tested primarily on Ubuntu 14.04 and OpenCV 2.4.10. Comments on building instructions are welcome!
 
-The library can be built using CMake (`sudo apt-get install cmake`):
+The library can be built using CMake:
 
+    sudo apt-get install build-essential
+    sudo apt-get install cmake
+
+OpenCV can be installed following this guide: [http://docs.opencv.org/doc/tutorials/introduction/linux_install/linux_install.html](http://docs.opencv.org/doc/tutorials/introduction/linux_install/linux_install.html). Then, the library can be built using:
+    
+    git clone https://github.com/davidstutz/superpixels-revisited.git
     cd superpixels-revisited
     cd build
     cmake ..
     make
 
-For building CIS/CS [5] you need to download the corresponding library first, see `lib_cis/README.md`.
+The executables will be created in `superpixels-revisited/bin` while the libraries will be written to `superpixels-revisited/lib`.
+
+**For building CIS/CS [5] you need to download the corresponding library first, see `lib_cis/README.md`.**
+
+Per default, all superpixel algorithms are built. By adapting `superpixels-revisited/CMakeLists.txt`, this behavior can be adapted by commenting out the corresponding subdirectories:
+
+    # SEEDS Revised
+    add_subdirectory(lib_seeds_revised)
+
+    # Constant Intensity Superpixels/Compact Superpixels
+    # add_subdirectory(lib_cis)
+    # add_subdirectory(cis_cli)
+
+    # Contour Relaxed Superpixels
+    add_subdirectory(lib_crs)
+    add_subdirectory(crs_cli)
+
+    # Felzenswalb & Huttenlocher
+    add_subdirectory(lib_fh)
+    add_subdirectory(fh_cli)
+
+    # Pseudo Boolean Superpixels
+    add_subdirectory(lib_pb)
+    add_subdirectory(pb_cli)
+
+    # SEEDS
+    add_subdirectory(lib_seeds)
+    add_subdirectory(seeds_cli)
+
+    # SLIC
+    add_subdirectory(lib_slic)
+    add_subdirectory(slic_cli)
+
+    # VLFeat SLIC
+    add_subdirectory(lib_vlfeat)
+    add_subdirectory(vlfeat_slic_cli)
+
 
 ## Usage
 

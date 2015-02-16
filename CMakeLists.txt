@@ -1,25 +1,24 @@
 cmake_minimum_required(VERSION 2.8)
 
-set(CMAKE_CXX_FLAGS  "-O4 -Wwrite-strings -fpermissive")
+set(CMAKE_CXX_FLAGS  "-O4")
+
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
 # 
 # To build the project, install CMake, then change into 'build' and
 # call 'cmake ../'.
 # 
 
-# SEEDS Revised is built at root level as the library is a Git submodule
-# already containing CMakeLists.txt.
-# find_package(OpenCV REQUIRED)
-# find_package(Boost REQUIRED)
-
 include_directories(lib_seeds_revised/lib)
-add_library(seeds_revised lib_seeds_revised/lib/SeedsRevised.cpp lib_seeds_revised/lib/Tools.cpp)
-target_link_libraries(seeds_revised ${OpenCV_LIBRARIES})
 
-# add_executable(seeds_revised_cli lib_seeds_revised/cli/main.cpp)
-# target_link_libraries(seeds_revised_cli ${Boost_LIBRARIES} ${OpenCV_LIBRARIES} seeds_revised)
+# SEEDS Revised
+add_subdirectory(lib_seeds_revised)
 
 # Constant Intensity Superpixels/Compact Superpixels
+# Remove comments after installing the library as described in
+# lib_cli/README.md!
 # add_subdirectory(lib_cis)
 # add_subdirectory(cis_cli)
 
