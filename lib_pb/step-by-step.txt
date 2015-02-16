@@ -1,0 +1,46 @@
+Hello,
+
+compiling others' code is always painful. This file is a step-by-step guide. I assume you are a windows user and have visual studio installed on your machine. If you are a linux user, the following lines should still provide some information. I will write a linux manual soon.
+
+1. Download CMake from http://cmake.org/cmake/resources/software.html and install it on your machine.
+
+This is an open-source build system. It will simplify our later operation.
+
+2. Download the VXL library from http://sourceforge.net/projects/vxl/ and unzip the downloaded file under the given directory SuperPB.
+
+This library provides some handy functions to read and write images. I have been using it through my experiments.
+
+3. Compile VXL.
+
+Launch the CMAKE GUI. Fill the first two textbox on the top as follows:
+"where is the source code": the directory which contain the vxl files you just unzipped, e.g. "YOURPATH/vxl-1.14.0"
+"where to build the binaries": the directory where you want the binaries to be, e.g. "YOURPATH/vxl-1.14.0/bin"
+
+Then click the 'Configure' button on the bottom. If you have not yet created the directory named "YOURPATH/vxl-1.14.0/bin", it will ask for your permission to do so. It will then ask for the project generator. Just select the visual studio you have and use default native compilers. Click 'Finish'. It takes a while to gather all the information it needs. When it finishes, you probably will see some entries in the main window. If you do not know what they are (just like me), just ignore them. If they are some entries in red colour, simply click the 'Configure' button again and again, until they are all settled.
+
+Then click the 'Generate' button. It will take a while to generate all the project files. When it finishes, open the folder "YOURPATH/vxl-1.14.0/bin". You will see a file named vxl.sln. That is the solution file for visual studio. You may double click it directly. The visual studio will start up and you can then compile vxl under visual studio. However, vxl is a little larger than the expectation of visual studio. Therefore, visual studio may become 'not responding' for a while. To my experience, it will come around some time later with all the job done. However, if you are using Win7, the very brilliant OS might directly kill visual studio when the later becomes 'not responding'. Hence a safer way is to use the command line to compile, e.g.:
+
+>devenv /Build "Release|Win32" vxl.sln
+
+You may change the option to 64bit.  If your computer does not recognize devenv, find it in your visual studio directory and add the directory into PATH, e.g. 
+
+>set PATH=YOURPATH\Microsoft Visual Studio 8\Common7\IDE;%PATH%
+
+It should take a long while to compile, when the number at the beginning of each line approaches 500, it is about to finish.
+
+4. Compile the superpixel code.
+
+My code uses the Elimination algorithm by Peter Carr and Richard Hartley ICCV09. Their code uses the Maxflow by Yuri Boykov. So, you will see a single .cpp file by the side of two heavier folders. But do not worry, use CMake again, you will obtain another solution file, SuperPB.sln, easily. Compile it under visual studio. If everything goes smoothly, you now have the exe file of my code.
+
+5. If you still have any problem or question, drop me a mail:
+
+yuhang.zhang@anu.edu.au
+
+Cheers,
+
+Yuhang
+
+
+
+
+
