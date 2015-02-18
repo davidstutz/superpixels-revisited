@@ -172,6 +172,10 @@ As example, for running SEEDS Revised on the test set of the Berkeley Segmentati
     200 images total ...
     On average, 0.118183 seconds needed ...
 
+    [10] P. Arbeláez, M. Maire, C. Fowlkes, J. Malik.
+         Contour detection and hierarchical image segmentation.
+         Transactions on Pattern Analysis and Machine Intelligence, volume 33, number 5, pages 898–916, 2011.
+
 In the following, each executable is described in detail.
 
 ### FH
