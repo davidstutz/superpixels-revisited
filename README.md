@@ -10,7 +10,7 @@ An overview over all superpixel algorithms and their evaluation results can be f
 
     [2] http://davidstutz.de/projects/superpixelsseeds/
 
-![Example: several superpixel segmentations.](lib_seeds_revised/screenshot.png?raw=true "Example: several superpixel segmentations")
+![Example: several superpixel segmentations.](screenshot.png?raw=true "Example: several superpixel segmentations")
 
 ## Index
 
