@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 
-set(CMAKE_CXX_FLAGS  "-O4")
+set(CMAKE_CXX_FLAGS  "-O4 -fpermissive")
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib)
@@ -21,6 +21,10 @@ add_subdirectory(lib_seeds_revised)
 # lib_cli/README.md!
 # add_subdirectory(lib_cis)
 # add_subdirectory(cis_cli)
+
+# Entropy Rate Superpixels
+add_subdirectory(lib_ers)
+add_subdirectory(ers_cli)
 
 # Contour Relaxed Superpixels
 add_subdirectory(lib_crs)

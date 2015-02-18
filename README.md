@@ -10,6 +10,24 @@ An overview over all superpixel algorithms and their evaluation results can be f
 
     [2] http://davidstutz.de/projects/superpixelsseeds/
 
+![Example: several superpixel segmentations.](lib_seeds_revised/screenshot.png?raw=true "Example: several superpixel segmentations")
+
+## Index
+
+* [Superpixel Algorithms](#superpixel-algorithms)
+* [Building](#building)
+* [Usage](#usage)
+    * [FH](#fh)
+    * [SLIC](#slic)
+    * [CIS/CS](#cis)
+    * [ERS](#ers)
+    * [PB](#pb)
+    * [CRS](#crs)
+    * [SEEDS](#seeds)
+* [License](#license)
+
+## Superpixel Algorithms
+
 Provided superpixels algorithms:
 
 * FH - Felzenswalb & Huttenlocher [3];
@@ -74,8 +92,14 @@ Per default, all superpixel algorithms are built. By adapting `superpixels-revis
     add_subdirectory(lib_seeds_revised)
 
     # Constant Intensity Superpixels/Compact Superpixels
+    # Remove comments after installing the library as described in
+    # lib_cli/README.md!
     # add_subdirectory(lib_cis)
     # add_subdirectory(cis_cli)
+
+    # Entropy Rate Superpixels
+    add_subdirectory(lib_ers)
+    add_subdirectory(ers_cli)
 
     # Contour Relaxed Superpixels
     add_subdirectory(lib_crs)
@@ -101,12 +125,242 @@ Per default, all superpixel algorithms are built. By adapting `superpixels-revis
     add_subdirectory(lib_vlfeat)
     add_subdirectory(vlfeat_slic_cli)
 
-
 ## Usage
 
 **Note:** Usage details can also be found in the corresponding `main.cpp` files (e.g. `crs_cli/main.cpp` or `lib_seeds_revised/cli/main.cpp`).
 
-**Work in progress.**
+In general, the following executables are provided:
+
+* `bin/cli`: SEEDS Revised;
+* `bin/cis_cli`: CIS/CS;
+* `bin/crs_cli`: CRS;
+* `bin/ers_cli`: ERS;
+* `bin/fh_cli`: FH;
+* `bin/pb_cli`: PB;
+* `bin/seeds_cli`: SEEDS;
+* `bin/slic_cli`: SLIC;
+* `bin/vlfeat_slic_cli`: VLFeat SLIC.
+
+Each command line tool is provided on an input directory containing a variables number of images to be oversegmented. Further, each executable is able to write the resulting segmentations to `.csv` files and create boundary images using the `--csv` and `--contour` options, respectively, see the example below. Using the `--help` option, all available options are printed, e.g.:
+
+    $ ./bin/cli --help
+    Allowed options:
+      --help                          produce help message
+      --input arg                     the folder to process, may contain several 
+                                      images
+      --bins arg (=5)                 number of bins used for color histograms
+      --neighborhood arg (=1)         neighborhood size used for smoothing prior
+      --confidence arg (=0.100000001) minimum confidence used for block update
+      --iterations arg (=2)           iterations at each level
+      --spatial-weight arg (=0.25)    spatial weight
+      --superpixels arg (=400)        desired number of supüerpixels
+      --verbose                       show additional information while processing
+      --csv                           save segmentation as CSV file
+      --contour                       save contour image of segmentation
+      --labels                        save label image of segmentation
+      --mean                          save mean colored image of segmentation
+      --output arg (=output)          specify the output directory (default is 
+                                      ./output)
+
+As example, for running SEEDS Revised on the test set of the Berkeley Segmentation Dataset [10], use
+
+    $ cd superpixels-revisited
+    $ wget http://www.eecs.berkeley.edu/Research/Projects/CS/vision/grouping/BSR/BSR_bsds500.tgz
+    $ tar -xvzf BSR_bsds500.tgz
+    $ mkdir output
+    $ ./bin/cli ./BSR/BSDS500/data/images/test/ ./output --contour
+    200 images total ...
+    On average, 0.118183 seconds needed ...
+
+In the following, each executable is described in detail.
+
+### FH
+
+    $ ./bin/fh_cli --help
+    Allowed options:
+      --help                   produce help message
+      --input arg              the folder to process
+      --sigma arg (=1)         sigma used for smoothing
+      --threshold arg (=20)    constant for threshold function
+      --minimum-size arg (=10) minimum component size
+      --time arg               time the algorithm and save results to the given 
+                               directory
+      --process                show additional information while processing
+      --csv                    save segmentation as CSV file
+      --contour                save contour image of segmentation
+      --mean                   save mean colored image of segmentation
+      --output arg (=output)   specify the output directory (default is ./output)
+
+### SLIC
+
+For SLIC, two executables are provided, the original implementation and the implementation as part of the VLFeat library:
+
+    # OriginalSLIC:
+    $ ./bin/slic_cli --help
+    Allowed options:
+      --help                   produce help message
+      --input arg              the folder to process (can also be passed as 
+                               positional argument)
+      --superpixels arg (=400) number of superpixles
+      --compactness arg (=40)  compactness
+      --perturb-seeds          perturb seeds
+      --iterations arg (=10)   iterations
+      --time arg               time the algorithm and save results to the given 
+                               directory
+      --process                show additional information while processing
+      --csv                    save segmentation as CSV file
+      --contour                save contour image of segmentation
+      --mean                   save mean colored image of segmentation
+      --output arg (=output)   specify the output directory (default is ./output)
+    # VLFeat SLIC:
+    $ ./bin/vlfeat_slic_cli --help
+    Allowed options:
+      --help                         produce help message
+      --input arg                    the folder to process (can also be passed as 
+                                     positional argument)
+      --region-size arg (=10)        region size used; defines the number of 
+                                     superpixels
+      --minimum-region-size arg (=1) minimum region size allowed
+      --regularization arg (=100)    regularization trades off color for spatial 
+                                     closeness
+      --time arg                     time the algorithm and save results to the 
+                                     given directory
+      --process                      show additional information while processing
+      --csv                          save segmentation as CSV file
+      --contour                      save contour image of segmentation
+      --mean                         save mean colored image of segmentation
+      --process                      show additional information
+      --output arg (=output)         specify the output directory (default is 
+                                     ./output)
+
+### CIS
+
+    $ ./bin/cis_cli --help
+    Allowed options:
+      --help                  produce help message
+      --input arg             folder containing the images to process
+      --region-size arg (=10) maxmimum allowed region size (that is region size x 
+                              region size patches)
+      --type arg (=1)         0 for compact superpixels, 1 for constant intensity 
+                              superpixels
+      --iterations arg (=2)   number of iterations
+      --lambda arg (=50)      lambda only influences constant intensity 
+                              superpixels; larger lambda results in smoother 
+                              boundaries
+      --process               show additional information while processing
+      --time arg              time the algorithm and save results to the given 
+                              directory
+      --csv                   save segmentation as CSV file
+      --contour               save contour image of segmentation
+      --mean                  save mean colored image of segmentation
+      --time                  save timings in BSD evaluation format in the given 
+                              directory
+      --output arg (=output)  specify the output directory (default is ./output)
+
+### ERS
+
+    $ ./bin/ers_cli --help
+    Allowed options:
+      --help                   produce help message
+      --input arg              the folder to process
+      --lambda arg (=0.5)      lambda
+      --sigma arg (=5)         sigma
+      --four-connected         use 4-connected
+      --superpixels arg (=400) number of superpixels
+      --time arg               time the algorithm and save results to the given 
+                               directory
+      --process                show additional information while processing
+      --csv                    save segmentation as CSV file
+      --contour                save contour image of segmentation
+      --mean                   save mean colored image of segmentation
+      --output arg (=output)   specify the output directory (default is ./output)
+
+### PB
+
+    $ ./bin/pb_cli --help
+    Allowed options:
+      --help                 produce help message
+      --input arg            the folder to process (can also be passed as 
+                             positional argument)
+      --height arg (=10)     height of initial vertical strips
+      --width arg (=10)      width of initial vertical strips
+      --sigma arg (=20)      balancing the weight between regular shape and 
+                             accurate edge
+      --max-flow             use max flow algorithm instead of elimination
+      --time arg             time the algorithm and save results to the given 
+                             directory
+      --process              show additional information while processing
+      --csv                  save segmentation as CSV file
+      --contour              save contour image of segmentation
+      --mean                 save mean colored image of segmentation
+      --output arg (=output) specify the output directory (default is ./output)
+
+### CRS
+
+    $ ./bin/crs_cli --help
+    Allowed options:
+      --help                                produce help message
+      --input arg                           the folder to process
+      --width arg (=20)                     width of blocks in initial superpixel 
+                                            segmentation
+      --height arg (=20)                    height of blocks in initial superpixel 
+                                            segmentation
+      --compactness arg (=0.045)            compactness weight
+      --clique-cost arg (=0.3)              direct clique cost
+      --iterations arg (=3)                 number of iterations to perform
+      --time arg                            time the algorithm and save results to 
+                                            the given directory
+      --process                             show additional information while 
+                                            processing
+      --csv                                 save segmentation as CSV file
+      --contour                             save contour image of segmentation
+      --mean                                save mean colored image of segmentation
+      --output arg (=output)                specify the output directory (default 
+                                            is ./output)
+
+### SEEDS
+
+For SEEDS, two implementations are provided. The first implementation, called SEEDS Revised, is published as result of the bachelor thesis [1]. The second implementation is the original implementation provided by van den Bergh et al.:
+
+    # SEEDS Revised:
+    $ ./bin/cli --help
+    Allowed options:
+      --help                          produce help message
+      --input arg                     the folder to process, may contain several 
+                                      images
+      --bins arg (=5)                 number of bins used for color histograms
+      --neighborhood arg (=1)         neighborhood size used for smoothing prior
+      --confidence arg (=0.100000001) minimum confidence used for block update
+      --iterations arg (=2)           iterations at each level
+      --spatial-weight arg (=0.25)    spatial weight
+      --superpixels arg (=400)        desired number of supüerpixels
+      --verbose                       show additional information while processing
+      --csv                           save segmentation as CSV file
+      --contour                       save contour image of segmentation
+      --labels                        save label image of segmentation
+      --mean                          save mean colored image of segmentation
+      --output arg (=output)          specify the output directory (default is 
+                                      ./output)
+    # Original SEEDS:
+    $ ./bin/seeds_cli --help
+    Allowed options:
+      --help                 produce help message
+      --input arg            the folder to process (can also be passed as 
+                             positional argument)
+      --bins arg (=5)        number of bins
+      --iterations arg (=2)  iterations at each level
+      --bsd arg              number of superpixels for BSDS500
+      --nyucropped arg       number of superpixels for the cropped NYU Depth V2
+      --nyuhalf arg          number of superpixel for NYU Depth V2 halfed
+      --nyuhalfcropped arg   number of superpixels for the cropped NYU Depth V2 
+                             halfed
+      --time arg             time the algorithm and save results to the given 
+                             directory
+      --process              show additional information while processing
+      --csv                  save segmentation as CSV file
+      --contour              save contour image of segmentation
+      --mean                 save mean colored image of segmentation
+      --output arg (=output) specify the output directory (default is ./output)
 
 ## License
 
