@@ -76,8 +76,9 @@ The library can be built using CMake:
 
 OpenCV can be installed following this guide: [http://docs.opencv.org/doc/tutorials/introduction/linux_install/linux_install.html](http://docs.opencv.org/doc/tutorials/introduction/linux_install/linux_install.html). Then, the library can be built using:
     
-    git clone https://github.com/davidstutz/superpixels-revisited.git
+    git clone --recursive https://github.com/davidstutz/superpixels-revisited.git
     cd superpixels-revisited
+    mkdir -p build
     cd build
     cmake ..
     make
