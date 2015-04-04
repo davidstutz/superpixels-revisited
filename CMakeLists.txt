@@ -47,5 +47,4 @@ add_subdirectory(lib_slic)
 add_subdirectory(slic_cli)
 
 # VLFeat SLIC
-add_subdirectory(lib_vlfeat)
 add_subdirectory(vlfeat_slic_cli)

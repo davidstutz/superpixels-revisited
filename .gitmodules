@@ -1,3 +1,6 @@
 [submodule "lib_seeds_revised"]
 	path = lib_seeds_revised
 	url = ../seeds-revised
+[submodule "lib_vlfeat"]
+	path = lib_vlfeat
+	url = ../../vlfeat/vlfeat
