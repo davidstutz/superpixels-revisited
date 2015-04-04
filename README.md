@@ -123,7 +123,6 @@ Per default, all superpixel algorithms are built. By adapting `superpixels-revis
     add_subdirectory(slic_cli)
 
     # VLFeat SLIC
-    add_subdirectory(lib_vlfeat)
     add_subdirectory(vlfeat_slic_cli)
 
 ## Usage
@@ -163,7 +162,7 @@ Each command line tool is provided on an input directory containing a variables 
       --output arg (=output)          specify the output directory (default is 
                                       ./output)
 
-As example, for running SEEDS Revised on the test set of the Berkeley Segmentation Dataset [10], use
+As example, for running SEEDS Revised on the test set of the Berkeley Segmentation Dataset [10], use:
 
     $ cd superpixels-revisited
     $ wget http://www.eecs.berkeley.edu/Research/Projects/CS/vision/grouping/BSR/BSR_bsds500.tgz
@@ -172,6 +171,8 @@ As example, for running SEEDS Revised on the test set of the Berkeley Segmentati
     $ ./bin/cli ./BSR/BSDS500/data/images/test/ ./output --contour
     200 images total ...
     On average, 0.118183 seconds needed ...
+
+For details on the Berkeley Segmentation Dataset [10], see:
 
     [10] P. Arbeláez, M. Maire, C. Fowlkes, J. Malik.
          Contour detection and hierarchical image segmentation.
