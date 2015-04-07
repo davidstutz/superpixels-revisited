@@ -74,7 +74,11 @@ The library can be built using CMake:
     sudo apt-get install build-essential
     sudo apt-get install cmake
 
-OpenCV can be installed following this guide: [http://docs.opencv.org/doc/tutorials/introduction/linux_install/linux_install.html](http://docs.opencv.org/doc/tutorials/introduction/linux_install/linux_install.html). Then, the library can be built using:
+OpenCV can be installed using:
+
+    sudo apt-get install libopencv-dev
+
+Or following this guide: [http://docs.opencv.org/doc/tutorials/introduction/linux_install/linux_install.html](http://docs.opencv.org/doc/tutorials/introduction/linux_install/linux_install.html). Then, the library can be built using:
     
     git clone --recursive https://github.com/davidstutz/superpixels-revisited.git
     cd superpixels-revisited
@@ -83,6 +87,12 @@ OpenCV can be installed following this guide: [http://docs.opencv.org/doc/tutori
     cmake ..
     make
 
+**Note:** This repository currently includes the [VLFeat](https://github.com/vlfeat/vlfeat) library [10] for simplicity. However, VLFeat can also be installed using:
+
+    sudo apt-get install libvlfeat-dev libvlfeat0
+
+Then, the target `vlfeat` in `vlfeat_slic_cli/CMakeLists.txt` can be commented out.
+    
 The executables will be created in `superpixels-revisited/bin` while the libraries will be written to `superpixels-revisited/lib`.
 
 **For building CIS/CS [5] you need to download the corresponding library first, see `lib_cis/README.md`.**
