@@ -1,14 +1,17 @@
 # Superpixels Revisited
 
-This library combines several state-of-the-art superpixel algorithms in a single library. For each approach, a user-friendly command line tool is provided - these command line tools were used for evaluation in [1]. An overview over all superpixel approaches is provided below.
+This library combines several state-of-the-art superpixel algorithms in a single library. For each approach, a user-friendly command line tool is provided - these command line tools were used for evaluation in [1] and [2]. An overview over all superpixel approaches is provided below.
 
     [1] D. Stutz, A. Hermans, B. Leibe.
         Superpixel Segmentation using Depth Information.
         Bachelor thesis, RWTH Aachen University, Aachen, Germany, 2014.
+	[2] D. Stutz.
+		Superpixel Segmentation: An Evaluation.
+		Pattern Recognition (J. Gall, P. Gehler, B. Leibe (Eds.)), Lecture Notes in Computer Science, vol. 9358, pages 555 - 562, 2015.
 
-An overview over all superpixel algorithms and their evaluation results can be found online at [2]:
+An overview over all superpixel algorithms and their evaluation results can be found online at [3]:
 
-    [2] http://davidstutz.de/projects/superpixelsseeds/
+    [3] http://davidstutz.de/projects/superpixelsseeds/
 
 ![Example: several superpixel segmentations.](screenshot.png?raw=true "Example: several superpixel segmentations")
 
@@ -30,40 +33,43 @@ An overview over all superpixel algorithms and their evaluation results can be f
 
 Provided superpixels algorithms:
 
-* FH - Felzenswalb & Huttenlocher [3];
-* SLIC - Simple Linear Iterative Clustering [4];
-* CIS/CS - Constant Intensity Superpixels/Compact Superpixels [5];
-* ERS - Entropy Rate Superpixels [6];
-* PB - Pseudo Boolean Superpixels [7];
-* CRS - Contour Relaxed Superpixels [8];
-* SEEDS - Superpixels Extracted via Energy-Driven Sampling [9].
+* FH - Felzenswalb & Huttenlocher [4];
+* SLIC - Simple Linear Iterative Clustering [5];
+* CIS/CS - Constant Intensity Superpixels/Compact Superpixels [6];
+* ERS - Entropy Rate Superpixels [7];
+* PB - Pseudo Boolean Superpixels [8];
+* CRS - Contour Relaxed Superpixels [9];
+* SEEDS - Superpixels Extracted via Energy-Driven Sampling [10].
 
 Note that the library of CIS/CS is, due to license restrictions, not directly included. See `lib_cis/README.md` for details.
 
-Further, note that for SLIC, both the original implementation as well as the implementation as part of the VLFeat library [10] is provided. Similarly, for SEEDS the original implementation and SEEDS Revised - an implementation written during the bachelor thesis [2] - is provided.
+Further, note that for SLIC, both the original implementation as well as the implementation as part of the VLFeat library [11] is provided. Similarly, for SEEDS the original implementation and SEEDS Revised - an implementation written during the bachelor thesis [2] - is provided.
 
-    [3] P. F. Felzenswalb, D. P. Huttenlocher.
+    [4] P. F. Felzenswalb, D. P. Huttenlocher.
         Efficient graph-based image segmentation.
         International Journal of Computer Vision, 59(2), 2004.
-    [4] R. Achanta, A. Shaji, K. Smith, A. Lucchi, P. Fua, S. Süsstrunk.
+    [5] R. Achanta, A. Shaji, K. Smith, A. Lucchi, P. Fua, S. Süsstrunk.
         SLIC superpixels.
         Technical report, École Polytechnique Fédérale de Lausanne, 2010.
-    [5] O. Veksler, Y. Boykov, P. Mehrani.
+    [6] O. Veksler, Y. Boykov, P. Mehrani.
         Superpixels and supervoxels in an energy optimization framework.
         European Conference on Computer Vision, pages 211–224, 2010.
-    [6] M. Y. Lui, O. Tuzel, S. Ramalingam, R. Chellappa.
+    [7] M. Y. Lui, O. Tuzel, S. Ramalingam, R. Chellappa.
         Entropy rate superpixel segmentation.
         Conference on Computer Vision and Pattern Recognition, pages 2097–2104, 2011.
-    [7] Superpixels via pseudo-boolean optimization. 
+    [8] Superpixels via pseudo-boolean optimization. 
         Y. Zhang, R. Hartley, J. Mashford, and S. Burn.
         In International Conference on Computer Vision, 2011.
-    [8] C. Conrad, M. Mertz, R. Mester.
+    [9] C. Conrad, M. Mertz, R. Mester.
         Contour-relaxed superpixels.
         Energy Minimization Methods in Computer Vision and Pattern Recognition,
         volume 8081 of Lecture Notes in Computer Science, pages 280–293, 2013.
-    [9] M. van den Bergh, X. Boix, G. Roig, B. de Capitani, L. van Gool.
+    [10] M. van den Bergh, X. Boix, G. Roig, B. de Capitani, L. van Gool.
         SEEDS: Superpixels extracted via energy-driven sampling.
         European Conference on Computer Vision, pages 13–26, 2012.
+	[11] A. Vedaldi, B. Fulkerson.
+		VLFeat: An Open and Portable Library of Computer Vision Algorithms.
+		\url{http://www.vlfeat.org/, 2008.
 
 ## Building
 
@@ -87,7 +93,7 @@ Or following this guide: [http://docs.opencv.org/doc/tutorials/introduction/linu
     cmake ..
     make
 
-**Note:** This repository currently includes the [VLFeat](https://github.com/vlfeat/vlfeat) library [10] for simplicity. However, VLFeat can also be installed using:
+**Note:** This repository currently includes the [VLFeat](https://github.com/vlfeat/vlfeat) library [11] for simplicity. However, VLFeat can also be installed using:
 
     sudo apt-get install libvlfeat-dev libvlfeat0
 
@@ -95,7 +101,7 @@ Then, the target `vlfeat` in `vlfeat_slic_cli/CMakeLists.txt` can be commented o
     
 The executables will be created in `superpixels-revisited/bin` while the libraries will be written to `superpixels-revisited/lib`.
 
-**For building CIS/CS [5] you need to download the corresponding library first, see `lib_cis/README.md`.**
+**For building CIS/CS [6] you need to download the corresponding library first, see `lib_cis/README.md`.**
 
 Per default, all superpixel algorithms are built. By adapting `superpixels-revisited/CMakeLists.txt`, this behavior can be adapted by commenting out the corresponding subdirectories:
 
@@ -172,7 +178,7 @@ Each command line tool is provided on an input directory containing a variables 
       --output arg (=output)          specify the output directory (default is 
                                       ./output)
 
-As example, for running SEEDS Revised on the test set of the Berkeley Segmentation Dataset [10], use:
+As example, for running SEEDS Revised on the test set of the Berkeley Segmentation Dataset [12], use:
 
     $ cd superpixels-revisited
     $ wget http://www.eecs.berkeley.edu/Research/Projects/CS/vision/grouping/BSR/BSR_bsds500.tgz
@@ -182,9 +188,9 @@ As example, for running SEEDS Revised on the test set of the Berkeley Segmentati
     200 images total ...
     On average, 0.118183 seconds needed ...
 
-For details on the Berkeley Segmentation Dataset [10], see:
+For details on the Berkeley Segmentation Dataset [12], see:
 
-    [10] P. Arbeláez, M. Maire, C. Fowlkes, J. Malik.
+    [12] P. Arbeláez, M. Maire, C. Fowlkes, J. Malik.
          Contour detection and hierarchical image segmentation.
          Transactions on Pattern Analysis and Machine Intelligence, volume 33, number 5, pages 898–916, 2011.
 
