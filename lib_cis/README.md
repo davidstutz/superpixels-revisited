@@ -8,14 +8,15 @@ Unfortunately, the code from Constant Intensity Superpixels/Compact Superpixels 
 
 Installation instructions:
 
-* Go to [http://www.csd.uwo.ca/faculty/olga/](http://www.csd.uwo.ca/faculty/olga/) and download the code.
-* Extract the archive into `lib_cis` in order to obtaint he following directory structure:
+Go to [http://www.csd.uwo.ca/faculty/olga/](http://www.csd.uwo.ca/faculty/olga/) and download the code.
+
+Extract the archive into `lib_cis` in order to obtaint he following directory structure (where the `CMakeLists.txt` files are provided by this library):
 
     lib_cis
     |- vlib
-       |- include
-       |- utils
-       |- CMakeLists.txt
+        |- include
+        |- utils
+        |- CMakeLists.txt
     |- README.txt (original README)
     |- README.md
     |- maxflow.cpp
@@ -23,15 +24,16 @@ Installation instructions:
     |- superpixels.h (provided by this library, not included in the download described above)
     |- CMakeLists.txt
 
-where the `CMakeLists.txt` files are provided by this library.
-* Comment out the `main` function in `superpixels.cpp`.
-* Either change the declaration of `loadEdges` inf `superpixels.cpp` to
+Comment out the `main` function in `superpixels.cpp`.
+
+Either change the declaration of `loadEdges` inf `superpixels.cpp` to
 
     void loadEdges(vector<Value> &weights,int num_pixels,int width,int height,
 			   Value lambda, char *name)
 
 or use `-fpermissive` (default).
-* Depending on the operating system, some changes in energy.h` are required: Change occurrences of
+
+Depending on the operating system, some changes in energy.h` are required: Change occurrences of
 
     add_tweights(y, 0, C);
     add_edge(x, y, B+C, 0);

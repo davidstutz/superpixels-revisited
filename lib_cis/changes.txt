@@ -1,3 +1,0 @@
-from 1.0 to 1.1
-
-Fixed minor bug that comes up in debug mode, do not insert a pairwise link between the seed to itself for intensity constant superpixels (TYPE = 1)
