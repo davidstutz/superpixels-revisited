@@ -73,7 +73,7 @@ Further, note that for SLIC, both the original implementation as well as the imp
 
 ## Building
 
-**Note:** The library was tested primarily on Ubuntu 14.04 and OpenCV 2.4.10. Comments on building instructions are welcome!
+**Note:** The library was tested primarily on Ubuntu 14.04, Ubuntu 16.04 and OpenCV 2.4.10 as well as OpenCV 2.4.13. Comments on building instructions are welcome!
 
 The library can be built using CMake:
 
@@ -390,7 +390,7 @@ For the license of a specific library, see the `README.md` in the corresponding 
 
 All command line tools are licensed under the BSD 3-Clause License:
 
-Copyright (c) 2014 - 2015, David Stutz
+Copyright (c) 2014 - 2016, David Stutz
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,

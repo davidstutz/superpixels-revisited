@@ -19,8 +19,8 @@ add_subdirectory(lib_seeds_revised)
 # Constant Intensity Superpixels/Compact Superpixels
 # Remove comments after installing the library as described in
 # lib_cli/README.md!
-# add_subdirectory(lib_cis)
-# add_subdirectory(cis_cli)
+add_subdirectory(lib_cis)
+add_subdirectory(cis_cli)
 
 # Entropy Rate Superpixels
 add_subdirectory(lib_ers)

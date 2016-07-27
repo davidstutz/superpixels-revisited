@@ -100,7 +100,6 @@ int main(int argc, const char** argv) {
         ("csv", "save segmentation as CSV file")
         ("contour", "save contour image of segmentation")
         ("mean", "save mean colored image of segmentation")
-        ("process", "show additional information")
         ("output", boost::program_options::value<std::string>()->default_value("output"), "specify the output directory (default is ./output)");
 
     boost::program_options::positional_options_description positionals;
