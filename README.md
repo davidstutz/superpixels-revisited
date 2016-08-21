@@ -75,10 +75,11 @@ Further, note that for SLIC, both the original implementation as well as the imp
 
 **Note:** The library was tested primarily on Ubuntu 14.04, Ubuntu 16.04 and OpenCV 2.4.10 as well as OpenCV 2.4.13. Comments on building instructions are welcome!
 
-The library can be built using CMake:
+The library can be built using CMake and Boost:
 
     sudo apt-get install build-essential
     sudo apt-get install cmake
+    sudo apt-get install libboost-all-dev
 
 OpenCV can be installed using:
 
@@ -98,7 +99,9 @@ Or following this guide: [http://docs.opencv.org/doc/tutorials/introduction/linu
     sudo apt-get install libvlfeat-dev libvlfeat0
 
 Then, the target `vlfeat` in `vlfeat_slic_cli/CMakeLists.txt` can be commented out.
-    
+
+**Also see `.travis.yml` for building instructions.**
+
 The executables will be created in `superpixels-revisited/bin` while the libraries will be written to `superpixels-revisited/lib`.
 
 **For building CIS/CS [6] you need to download the corresponding library first, see `lib_cis/README.md`.**
