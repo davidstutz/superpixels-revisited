@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/davidstutz/superpixels-revisited.svg?branch=master)](https://travis-ci.org/davidstutz/superpixels-revisited)
 
+**A more comprehensive comparison of superpixel algorithms, including the corresponding benchmark and implementations, can be found here: [davidstutz/superpixel-benchmark](https://github.com/davidstutz/superpixel-benchmark).**
+
 This library combines several state-of-the-art superpixel algorithms in a single library. For each approach, a user-friendly command line tool is provided - these command line tools were used for evaluation in [1] and [2]. An overview over all superpixel approaches is provided below.
 
     [1] D. Stutz, A. Hermans, B. Leibe.
